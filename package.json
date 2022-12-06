@@ -4,7 +4,8 @@
   "description": "A web app that helps music supervisors find what they're looking for.",
   "main": "index.js",
   "scripts": {
-    "watch": "nodemon server.js"
+    "watch": "nodemon server.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,14 @@
   },
   "homepage": "https://github.com/naveed-mahmoudian/Music-Soup#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "bcrypt": "^5.1.0",
+    "connect-session-sequelize": "^7.1.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.6",
+    "express-session": "^1.17.3",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.26.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
