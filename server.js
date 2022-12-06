@@ -1,15 +1,21 @@
-// Import Express
+// Imports
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const session = require("express-session");
 const exphbs = require("express-handlebars");
-require("dotenv").config();
+const sequelize = require("./config/connection");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
+const routes = require("./controllers");
 
+// Express
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Handlebars
 const hbs = exphbs.create();
+app.engine("handlebars", hbs.engine);
+app.set("view engine", "handlebars");
 
 // Session
 const sess = {
@@ -27,19 +33,16 @@ const sess = {
   }),
 };
 
-// Set up middleware
-app.use(express.static("public"));
+// Middleware
+app.use(session(sess));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(routes);
 
-app.get("/", (req, res) => {
-  res.status(200);
+// Sync & Start server with database
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () =>
+    console.log(`server live at http://localhost:${PORT}/`)
+  );
 });
-
-app.post("/start", (req, res) => {
-  res.status(200);
-  res.end();
-});
-
-app.listen(PORT, (req, res) =>
-  console.log(`server live at http://localhost:${PORT}/`)
-);
