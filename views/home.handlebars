@@ -1,1 +1,58 @@
-<h1>Homepage</h1>
+<div
+  class="container vh-100 d-flex flex-column justify-content-center align-items-center"
+>
+  <button type="button" class="btn btn-outline-dark" id="getStartedBtn">
+    Get Started
+  </button>
+  {{! Login Modal }}
+  <div
+    class="modal fade"
+    id="loginModal"
+    tabindex="-1"
+    aria-labelledby="loginModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark text-white">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="loginModalLabel">Login</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="name@example.com"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="••••••"
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-light"
+            id="loginBtn"
+          >Login</button>
+          <a href="/signup" class="btn btn-outline-secondary">Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/js/login.js"></script>
