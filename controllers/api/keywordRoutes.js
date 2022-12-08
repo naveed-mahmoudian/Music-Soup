@@ -2,6 +2,8 @@
 const router = require("express").Router();
 require("dotenv").config();
 const { Configuration, OpenAIApi } = require("openai");
+const ScSearcher = require("sc-searcher");
+const scSearch = new ScSearcher();
 
 // Routes
 router.post("/", async (req, res) => {
@@ -24,6 +26,18 @@ router.post("/", async (req, res) => {
     const keywords = response.data.choices[0].text;
 
     console.log(keywords);
+
+    var client_id = process.env.CLIENT_ID;
+    var query = keywords;
+    var result_limit = 50;
+
+    scSearch.init(client_id);
+
+    scSearch.getTracks(query, result_limit).then((data) => {
+      console.log(data);
+      console.log(data.length);
+      res.status(200).json(data);
+    });
   } catch (error) {
     res.status(500).json(error);
   }
